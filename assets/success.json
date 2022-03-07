@@ -1,0 +1,39 @@
+{
+    "success" : [
+        {
+            "id": 0,   
+            "habit-name": "Read",
+            "benefit-1": "",
+            "benefit-2": "",
+            "benefit-3": "",
+            "benefit-4": "",
+            "benefit-5": "",
+            "duration": 120,
+            "type": "track",
+            "image": "assets/nature-sounds.png"
+        },
+        {
+            "id": 1,   
+            "habit-name": "Meditate",
+            "benefit-1": "",
+            "benefit-2": "",
+            "benefit-3": "",
+            "benefit-4": "",
+            "benefit-5": "",
+            "duration": 120,
+            "type": "track",
+            "image": "assets/nature-sounds.png"
+        },
+        {
+            "id": 2,   
+            "habit-name": "Eat Healthy",
+            "benefit-1": "",
+            "benefit-2": "",
+            "benefit-3": "",
+            "benefit-4": "",
+            "benefit-5": "",
+            "type": "yes/no",
+            "image": "assets/nature-sounds.png"
+        }
+    ]
+}

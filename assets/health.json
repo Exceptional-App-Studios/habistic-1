@@ -1,0 +1,39 @@
+{
+    "health" : [
+        {
+            "id": 0,   
+            "habitname": "Read",
+            "benefit1": "Have more interesting things to talk about.",
+            "benefit2": "Look at yourself & the world more positively.",
+            "benefit3": "Learn from the experience of others.",
+            "benefit4": "You’ll make better choices and take actions more often.",
+            "benefit5": "You’ll Be more empathetic",
+            "duration": 120,
+            "type": "track",
+            "image": "assets/book.png"
+        },
+        {
+            "id": 1,   
+            "habitname": "Meditate",
+            "benefit1": "Become more calm and happy.",
+            "benefit2": "Look at yourself & the world more positively.",
+            "benefit3": "Learn from the experience of others.",
+            "benefit4": "You’ll make better choices and take actions more often.",
+            "benefit5": "You’ll Be more empathetic",
+            "duration": 120,
+            "type": "track",
+            "image": "assets/book.png"
+        },
+        {
+            "id": 2,   
+            "habitname": "Eat Healthy",
+            "benefit1": "Stay healthy and look young.",
+            "benefit2": "Look at yourself & the world more positively.",
+            "benefit3": "Learn from the experience of others.",
+            "benefit4": "You’ll make better choices and take actions more often.",
+            "benefit5": "You’ll Be more empathetic",
+            "type": "yes/no",
+            "image": "assets/book.png"
+        }
+    ]
+}
