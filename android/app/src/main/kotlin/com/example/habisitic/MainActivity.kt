@@ -1,4 +1,4 @@
-package com.example.habisitic
+package com.exceptionalapps.habisitic
 
 import io.flutter.embedding.android.FlutterActivity
 

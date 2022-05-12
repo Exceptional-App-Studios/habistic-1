@@ -2,37 +2,60 @@
     "success" : [
         {
             "id": 0,   
-            "habit-name": "Read",
+            "habit-name": "Reading Self-Help books",
             "benefit-1": "",
             "benefit-2": "",
             "benefit-3": "",
             "benefit-4": "",
             "benefit-5": "",
-            "duration": 120,
-            "type": "track",
+            "minigoal": 2,
+            "type": "yes/no",
             "image": "assets/nature-sounds.png"
         },
         {
             "id": 1,   
-            "habit-name": "Meditate",
+            "habit-name": "Listening to podcast",
             "benefit-1": "",
             "benefit-2": "",
             "benefit-3": "",
             "benefit-4": "",
             "benefit-5": "",
-            "duration": 120,
+            "minigoal": 600,
             "type": "track",
             "image": "assets/nature-sounds.png"
         },
         {
             "id": 2,   
-            "habit-name": "Eat Healthy",
+            "habit-name": "Set Daily priorities",
+            "benefit-1": "",
+            "benefit-2": "",
+            "benefit-3": "",
+            "benefit-4": "",
+            "benefit-5": "",   
+            "type": "yes/no",
+            "image": "assets/nature-sounds.png"
+        },
+        {
+            "id": 3,   
+            "habit-name": "Wake Up Early",
             "benefit-1": "",
             "benefit-2": "",
             "benefit-3": "",
             "benefit-4": "",
             "benefit-5": "",
             "type": "yes/no",
+            "image": "assets/nature-sounds.png"
+        },
+        {
+            "id": 3,   
+            "habit-name": "Learn Something new",
+            "benefit-1": "",
+            "benefit-2": "",
+            "benefit-3": "",
+            "benefit-4": "",
+            "benefit-5": "",
+            "minigoal": 300,
+            "type": "track",
             "image": "assets/nature-sounds.png"
         }
     ]

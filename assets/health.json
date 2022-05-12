@@ -2,37 +2,74 @@
     "health" : [
         {
             "id": 0,   
-            "habitname": "Read",
+            "habitname": "Drink Water",
             "benefit1": "Have more interesting things to talk about.",
             "benefit2": "Look at yourself & the world more positively.",
             "benefit3": "Learn from the experience of others.",
             "benefit4": "You’ll make better choices and take actions more often.",
             "benefit5": "You’ll Be more empathetic",
-            "duration": 120,
-            "type": "track",
+            "type": "yes/no",
+            "minigoal": 8,
             "image": "assets/book.png"
         },
         {
             "id": 1,   
-            "habitname": "Meditate",
+            "habitname": "Eat Fruit",
             "benefit1": "Become more calm and happy.",
             "benefit2": "Look at yourself & the world more positively.",
             "benefit3": "Learn from the experience of others.",
             "benefit4": "You’ll make better choices and take actions more often.",
             "benefit5": "You’ll Be more empathetic",
-            "duration": 120,
-            "type": "track",
+            "minigoal": 2,
+            "type": "yes/no",
             "image": "assets/book.png"
         },
         {
             "id": 2,   
-            "habitname": "Eat Healthy",
+            "habitname": "Walk",
             "benefit1": "Stay healthy and look young.",
             "benefit2": "Look at yourself & the world more positively.",
             "benefit3": "Learn from the experience of others.",
             "benefit4": "You’ll make better choices and take actions more often.",
             "benefit5": "You’ll Be more empathetic",
-            "type": "yes/no",
+            "minigoal": 600,
+            "type": "track",
+            "image": "assets/book.png"
+        },
+        {
+            "id": 3,   
+            "habitname": "Cardio Session",
+            "benefit1": "Stay healthy and look young.",
+            "benefit2": "Look at yourself & the world more positively.",
+            "benefit3": "Learn from the experience of others.",
+            "benefit4": "You’ll make better choices and take actions more often.",
+            "benefit5": "You’ll Be more empathetic",
+            "minigoal": 300,
+            "type": "track",
+            "image": "assets/book.png"
+        },
+        {
+            "id": 4,   
+            "habitname": "Morning Stretch",
+            "benefit1": "Stay healthy and look young.",
+            "benefit2": "Look at yourself & the world more positively.",
+            "benefit3": "Learn from the experience of others.",
+            "benefit4": "You’ll make better choices and take actions more often.",
+            "benefit5": "You’ll Be more empathetic",
+            "minigoal":300,
+            "type": "track",
+            "image": "assets/book.png"
+        },
+        {
+            "id": 5,   
+            "habitname": "Getting Enough Sleep",
+            "benefit1": "Stay healthy and look young.",
+            "benefit2": "Look at yourself & the world more positively.",
+            "benefit3": "Learn from the experience of others.",
+            "benefit4": "You’ll make better choices and take actions more often.",
+            "benefit5": "You’ll Be more empathetic",
+            "minigoal": 25200,
+            "type": "track",
             "image": "assets/book.png"
         }
     ]

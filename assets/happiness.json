@@ -2,18 +2,6 @@
     "happiness" : [
         {
             "id": 0,   
-            "habit-name": "Read",
-            "benefit-1": "",
-            "benefit-2": "",
-            "benefit-3": "",
-            "benefit-4": "",
-            "benefit-5": "",
-            "duration": 120,
-            "type": "track",
-            "image": "assets/nature-sounds.png"
-        },
-        {
-            "id": 1,   
             "habit-name": "Meditate",
             "benefit-1": "",
             "benefit-2": "",
@@ -25,14 +13,51 @@
             "image": "assets/nature-sounds.png"
         },
         {
-            "id": 2,   
-            "habit-name": "Eat Healthy",
+            "id": 1,   
+            "habit-name": "Exercise",
             "benefit-1": "",
             "benefit-2": "",
             "benefit-3": "",
             "benefit-4": "",
             "benefit-5": "",
-            "type": "yes/no",
+            "minigoal": 300,
+            "type": "track",
+            "image": "assets/nature-sounds.png"
+        },
+        {
+            "id": 2,   
+            "habit-name": "Gratitude Journaling",
+            "benefit-1": "",
+            "benefit-2": "",
+            "benefit-3": "",
+            "benefit-4": "",
+            "benefit-5": "",
+            "type": "track",
+            "minigoal":300,
+            "image": "assets/nature-sounds.png"
+        },
+        {
+            "id": 3,   
+            "habit-name": "Reciting Affirmations",
+            "benefit-1": "",
+            "benefit-2": "",
+            "benefit-3": "",
+            "benefit-4": "",
+            "benefit-5": "",
+            "minigoal":300,
+            "type": "track",
+            "image": "assets/nature-sounds.png"
+        },
+        {
+            "id": 4,   
+            "habit-name": "Visualising",
+            "benefit-1": "",
+            "benefit-2": "",
+            "benefit-3": "",
+            "benefit-4": "",
+            "benefit-5": "",
+            "minigoal":300,
+            "type": "track",
             "image": "assets/nature-sounds.png"
         }
     ]

@@ -1,9 +1,13 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habisitic/main.dart';
 import 'package:habisitic/models/healthmodel.dart';
+import 'package:habisitic/models/myhabitmodel.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hive/hive.dart';
 
 class HealthHabit extends StatefulWidget {
   const HealthHabit({Key key}) : super(key: key);
@@ -14,10 +18,12 @@ class HealthHabit extends StatefulWidget {
 
 class _HealthHabitState extends State<HealthHabit> {
   List<HealthHabits> health;
+  Box<MyHabitModel> dataBox;
 
   @override
   void initState() {
     fetchHealth();
+    dataBox = Hive.box<MyHabitModel>(dataBoxName);
     super.initState();
   }
 
@@ -177,157 +183,200 @@ class _HealthHabitState extends State<HealthHabit> {
                                       ),
                                       GestureDetector(
                                         onTap: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return AlertDialog(
-                                                  insetPadding: EdgeInsets.zero,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            11),
-                                                  ),
-                                                  content: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: [
-                                                      Container(
-                                                        child: Column(
-                                                          children: [
-                                                            Center(
-                                                              child:
-                                                                  CircleAvatar(
-                                                                radius: 60,
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      top:
-                                                                          12.0),
-                                                              child: Text(
-                                                                healthhabit
-                                                                    .habitname,
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .roboto(
-                                                                  fontSize: 20,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
+                                          if (dataBox.values.any((element) =>
+                                              element.name ==
+                                              healthhabit.habitname))
+                                            Fluttertoast.showToast(
+                                                msg: 'Habit already exists');
+                                          else
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return AlertDialog(
+                                                    insetPadding:
+                                                        EdgeInsets.zero,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              11),
+                                                    ),
+                                                    content: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        Container(
+                                                          child: Column(
+                                                            children: [
+                                                              Center(
+                                                                child:
+                                                                    CircleAvatar(
+                                                                  radius: 60,
                                                                 ),
                                                               ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      top:
-                                                                          27.0),
-                                                              child: Text(
-                                                                'Pick the best time:',
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .roboto(
-                                                                  fontSize: 17,
-                                                                  color: Colors
-                                                                      .grey,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        top:
+                                                                            12.0),
+                                                                child: Text(
+                                                                  healthhabit
+                                                                      .habitname,
+                                                                  style:
+                                                                      GoogleFonts
+                                                                          .roboto(
+                                                                    fontSize:
+                                                                        20,
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      top: 5,
-                                                                      bottom:
-                                                                          50),
-                                                              child: Text(
-                                                                '7:30 AM >',
-                                                                style: GoogleFonts
-                                                                    .openSans(
-                                                                  fontSize: 21,
-                                                                  color: HexColor(
-                                                                      '#5353FF'),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        top:
+                                                                            27.0),
+                                                                child: Text(
+                                                                  'Pick the best time:',
+                                                                  style:
+                                                                      GoogleFonts
+                                                                          .roboto(
+                                                                    fontSize:
+                                                                        17,
+                                                                    color: Colors
+                                                                        .grey,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                            GestureDetector(
-                                                              onTap:
-                                                                  () async {},
-                                                              child: Container(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    1.6,
-                                                                height: 56,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              30),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        top: 5,
+                                                                        bottom:
+                                                                            50),
+                                                                child: Text(
+                                                                  '7:30 AM >',
+                                                                  style: GoogleFonts
+                                                                      .openSans(
+                                                                    fontSize:
+                                                                        21,
+                                                                    color: HexColor(
+                                                                        '#5353FF'),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                  ),
                                                                 ),
-                                                                child: Center(
-                                                                  child: Text(
-                                                                    '+Add to My Habits',
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          14,
+                                                              ),
+                                                              GestureDetector(
+                                                                onTap:
+                                                                    () async {
+                                                                  MyHabitModel
+                                                                      data =
+                                                                      MyHabitModel(
+                                                                    name: healthhabit
+                                                                        .habitname,
+                                                                    complete:
+                                                                        false,
+                                                                    avgtime: 0,
+                                                                    reminder:
+                                                                        '7:30',
+                                                                    todaytime:
+                                                                        0,
+                                                                    totaldays:
+                                                                        0,
+                                                                    totaltime:
+                                                                        0,
+                                                                    type: healthhabit
+                                                                        .type,
+                                                                    minigoal:
+                                                                        healthhabit
+                                                                            .duration,
+                                                                    donedates: [],
+                                                                  );
+
+                                                                  await dataBox
+                                                                      .add(
+                                                                          data);
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      1.6,
+                                                                  height: 56,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            30),
+                                                                  ),
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      '+Add to My Habits',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            14,
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      top:
-                                                                          15.0),
-                                                              child:
-                                                                  GestureDetector(
-                                                                onTap: () {
-                                                                  Navigator.pop(
-                                                                      context);
-                                                                },
-                                                                child: Text(
-                                                                  'Close',
-                                                                  style: GoogleFonts
-                                                                      .openSans(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        17,
-                                                                    color: HexColor(
-                                                                        '#777777'),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        top:
+                                                                            15.0),
+                                                                child:
+                                                                    GestureDetector(
+                                                                  onTap: () {
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                  },
+                                                                  child: Text(
+                                                                    'Close',
+                                                                    style: GoogleFonts
+                                                                        .openSans(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      fontSize:
+                                                                          17,
+                                                                      color: HexColor(
+                                                                          '#777777'),
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ],
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                );
-                                              });
+                                                      ],
+                                                    ),
+                                                  );
+                                                });
                                         },
                                         child: CircleAvatar(
                                           backgroundColor: Colors.white,
