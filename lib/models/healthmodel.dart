@@ -56,7 +56,8 @@ class HealthHabits {
   final String benefit3;
   final String benefit4;
   final String benefit5;
-  final int duration;
+  final int minigoal;
+  final String trackway;
   final String type;
   final String image;
 
@@ -68,7 +69,8 @@ class HealthHabits {
     this.benefit3,
     this.benefit4,
     this.benefit5,
-    this.duration,
+    this.minigoal,
+    this.trackway,
     this.type,
     this.image,
   });
@@ -81,7 +83,8 @@ class HealthHabits {
     String benefit3,
     String benefit4,
     String benefit5,
-    int duration,
+    int minigoal,
+    String trackway,
     String type,
     String image,
   }) {
@@ -93,7 +96,8 @@ class HealthHabits {
       benefit3: benefit3 ?? this.benefit3,
       benefit4: benefit4 ?? this.benefit4,
       benefit5: benefit5 ?? this.benefit5,
-      duration: duration ?? this.duration,
+      minigoal: minigoal ?? this.minigoal,
+      trackway: trackway ?? this.trackway,
       type: type ?? this.type,
       image: image ?? this.image,
     );
@@ -108,8 +112,9 @@ class HealthHabits {
       'benefit3': benefit3,
       'benefit4': benefit4,
       'benefit5': benefit5,
-      'duration': duration,
+      'duration': minigoal,
       'type': type,
+      'trackway': trackway,
       'image': image,
     };
   }
@@ -123,7 +128,8 @@ class HealthHabits {
       benefit3: map['benefit3'] ?? '',
       benefit4: map['benefit4'] ?? '',
       benefit5: map['benefit5'] ?? '',
-      duration: map['duration']?.toInt() ?? 0,
+      trackway: map['trackway'] ?? '',
+      minigoal: map['minigoal']?.toInt() ?? 0,
       type: map['type'] ?? '',
       image: map['image'] ?? '',
     );
@@ -136,7 +142,7 @@ class HealthHabits {
 
   @override
   String toString() {
-    return 'HealthHabits(id: $id, habitname: $habitname, benefit1: $benefit1, benefit2: $benefit2, benefit3: $benefit3, benefit4: $benefit4, benefit5: $benefit5, duraton: $duration, type: $type, image: $image)';
+    return 'HealthHabits(id: $id, habitname: $habitname, benefit1: $benefit1, benefit2: $benefit2, benefit3: $benefit3, benefit4: $benefit4, benefit5: $benefit5, minigoal: $minigoal, type: $type, image: $image, trackway: $trackway,)';
   }
 
   @override
@@ -151,7 +157,8 @@ class HealthHabits {
         other.benefit3 == benefit3 &&
         other.benefit4 == benefit4 &&
         other.benefit5 == benefit5 &&
-        other.duration == duration &&
+        other.minigoal == minigoal &&
+        other.trackway == trackway &&
         other.type == type &&
         other.image == image;
   }
@@ -165,7 +172,8 @@ class HealthHabits {
         benefit3.hashCode ^
         benefit4.hashCode ^
         benefit5.hashCode ^
-        duration.hashCode ^
+        minigoal.hashCode ^
+        trackway.hashCode ^
         type.hashCode ^
         image.hashCode;
   }

@@ -61,7 +61,7 @@ class _HealthHabitState extends State<HealthHabit> {
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 10.0),
                         child: Card(
-                          color: HexColor('6767FF'),
+                          color: Colors.transparent,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
@@ -70,6 +70,13 @@ class _HealthHabitState extends State<HealthHabit> {
                           child: Container(
                             width: 331,
                             decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(healthhabit.image),
+                                  fit: BoxFit.cover,
+                                  colorFilter: ColorFilter.mode(
+                                    Colors.black.withOpacity(0.2),
+                                    BlendMode.srcOver,
+                                  )),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Column(
@@ -212,6 +219,10 @@ class _HealthHabitState extends State<HealthHabit> {
                                                                 child:
                                                                     CircleAvatar(
                                                                   radius: 60,
+                                                                  backgroundImage:
+                                                                      NetworkImage(
+                                                                          healthhabit
+                                                                              .image),
                                                                 ),
                                                               ),
                                                               Padding(
@@ -284,6 +295,9 @@ class _HealthHabitState extends State<HealthHabit> {
                                                                   MyHabitModel
                                                                       data =
                                                                       MyHabitModel(
+                                                                    trackway:
+                                                                        healthhabit
+                                                                            .trackway,
                                                                     name: healthhabit
                                                                         .habitname,
                                                                     complete:
@@ -301,8 +315,9 @@ class _HealthHabitState extends State<HealthHabit> {
                                                                         .type,
                                                                     minigoal:
                                                                         healthhabit
-                                                                            .duration,
+                                                                            .minigoal,
                                                                     donedates: [],
+                                                                    everydaytime: [],
                                                                   );
 
                                                                   await dataBox

@@ -28,13 +28,13 @@ class MyHabitModelAdapter extends TypeAdapter<MyHabitModel> {
       minigoal: fields[8] as int,
       donedates: (fields[9] as List)?.cast<String>(),
       everydaytime: (fields[10] as List)?.cast<String>(),
-    );
+    )..trackway = fields[11] as String;
   }
 
   @override
   void write(BinaryWriter writer, MyHabitModel obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -56,7 +56,9 @@ class MyHabitModelAdapter extends TypeAdapter<MyHabitModel> {
       ..writeByte(9)
       ..write(obj.donedates)
       ..writeByte(10)
-      ..write(obj.everydaytime);
+      ..write(obj.everydaytime)
+      ..writeByte(11)
+      ..write(obj.trackway);
   }
 
   @override
