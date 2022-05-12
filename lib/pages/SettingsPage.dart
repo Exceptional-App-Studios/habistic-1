@@ -141,7 +141,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ],
                                 ),
                                 Text(
-                                  'japanjoshi1234#@gmail.com',
+                                  'japanjoshi1234@gmail.com',
                                   style: GoogleFonts.openSans(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w300,

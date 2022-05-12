@@ -26,6 +26,8 @@ class MyHabitModel extends HiveObject {
   List<String> donedates;
   @HiveField(10)
   List<String> everydaytime;
+  @HiveField(11)
+  String trackway;
 
   MyHabitModel({
     this.name,
@@ -39,5 +41,6 @@ class MyHabitModel extends HiveObject {
     this.minigoal,
     this.donedates,
     this.everydaytime,
+    this.trackway,
   });
 }

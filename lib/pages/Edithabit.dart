@@ -31,13 +31,14 @@ class _EditHabitState extends State<EditHabit> {
     dataBox = Hive.box<MyHabitModel>(dataBoxName);
     String initialText = dataBox.getAt(index).name;
     _editingController = TextEditingController(text: initialText);
+    dropdownvalue = dataBox.getAt(index).trackway;
     super.initState();
   }
 
   bool _isEditingText = false;
   TextEditingController _editingController;
   String initialText;
-  String dropdownvalue = 'Minutes';
+  String dropdownvalue;
   var items = [
     'Minutes',
     'Hours',
@@ -201,33 +202,34 @@ class _EditHabitState extends State<EditHabit> {
                       })
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Mini-Goal (Recommended)',
-                    style: GoogleFonts.openSans(
-                      fontSize: 15,
-                      color: HexColor('#777777'),
-                      fontWeight: FontWeight.w400,
+              Padding(
+                padding: const EdgeInsets.only(right: 18.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Mini-Goal (Recommended)',
+                      style: GoogleFonts.openSans(
+                        fontSize: 15,
+                        color: HexColor('#777777'),
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                  ),
-                  Text(
-                    dataBox.getAt(index).minigoal < 60
-                        ? dataBox.getAt(index).minigoal.toString() + ' seconds'
-                        : dataBox.getAt(index).minigoal < 3600
-                            ? (dataBox.getAt(index).minigoal / 60)
-                                    .toStringAsFixed(0) +
-                                ' minutes'
-                            : (dataBox.getAt(index).minigoal / 60)
-                                    .toStringAsFixed(0) +
-                                ' hours',
-                    style: GoogleFonts.openSans(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  )
-                ],
+                    Text(
+                      dataBox.getAt(index).minigoal < 60
+                          ? dataBox.getAt(index).minigoal.toString()
+                          : dataBox.getAt(index).minigoal < 3600
+                              ? (dataBox.getAt(index).minigoal / 60)
+                                  .toStringAsFixed(0)
+                              : (dataBox.getAt(index).minigoal / 60)
+                                  .toStringAsFixed(0),
+                      style: GoogleFonts.openSans(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )
+                  ],
+                ),
               ),
               SizedBox(height: 15),
               Row(
