@@ -530,6 +530,7 @@ class _TrackProgressState extends State<TrackProgress> {
   void initState() {
     habit = widget.habitModel;
     dataBox = Hive.box<MyHabitModel>(dataBoxName);
+    _currentCount = dataBox.getAt(widget.index).minigoal ~/ 60;
     // trackController.text = track.toString();
     super.initState();
   }
@@ -553,7 +554,7 @@ class _TrackProgressState extends State<TrackProgress> {
     );
   }
 
-  int _currentCount = 2;
+  int _currentCount;
 
   void _increment() {
     setState(() {
@@ -600,24 +601,12 @@ class _TrackProgressState extends State<TrackProgress> {
                   children: [
                     _createIncrementDicrementButton(
                         Icons.remove, () => _dicrement()),
-
                     Text(
                       _currentCount.toString(),
                       style: GoogleFonts.roboto(
                         fontSize: 40,
                       ),
                     ),
-
-                    // Container(
-                    //   width: 70,
-                    //   child: TextField(
-
-                    //     keyboardType: TextInputType.number,
-                    //     textAlign: TextAlign.center,
-                    //   ),
-                    // ),
-                    // ),
-
                     _createIncrementDicrementButton(
                         Icons.add, () => _increment()),
                   ],
@@ -625,7 +614,14 @@ class _TrackProgressState extends State<TrackProgress> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 80, bottom: 10),
+              padding: const EdgeInsets.only(top: 14.0),
+              child: Text(
+                dataBox.getAt(widget.index).trackway,
+                style: GoogleFonts.roboto(fontSize: 25),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 50, bottom: 10),
               child: GestureDetector(
                 onTap: () async {
                   dataBox.put(

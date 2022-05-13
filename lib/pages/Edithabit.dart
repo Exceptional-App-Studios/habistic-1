@@ -23,32 +23,43 @@ class _EditHabitState extends State<EditHabit> {
   bool minigoal = false;
   bool timerdefault = false;
   bool isEditing = false;
+  bool isMiniGoalEditing = false;
 
   @override
   void initState() {
     index = widget.index;
+
     fromdone = widget.fromdone;
+
     dataBox = Hive.box<MyHabitModel>(dataBoxName);
+
     String initialText = dataBox.getAt(index).name;
+
+    minigoalText = dataBox.getAt(index).minigoal.toString();
+
     _editingController = TextEditingController(text: initialText);
+
+    _minigoalController = TextEditingController(text: minigoalText);
+
     dropdownvalue = dataBox.getAt(index).trackway;
+
+    items.add(dropdownvalue);
+
     super.initState();
   }
 
   bool _isEditingText = false;
   TextEditingController _editingController;
+  TextEditingController _minigoalController;
   String initialText;
+  String minigoalText;
   String dropdownvalue;
-  var items = [
-    'Minutes',
-    'Hours',
-    'Push-Ups',
-    'Fruits',
-  ];
+  var items = ['Custom'];
 
   @override
   void dispose() {
     _editingController.dispose();
+    // _minigoalController.dispose();
     super.dispose();
   }
 
@@ -125,6 +136,9 @@ class _EditHabitState extends State<EditHabit> {
                                       totaltime: dataBox.getAt(index).totaltime,
                                       type: dataBox.getAt(index).type,
                                       donedates: dataBox.getAt(index).donedates,
+                                      everydaytime:
+                                          dataBox.getAt(index).everydaytime,
+                                      trackway: dataBox.getAt(index).trackway,
                                     ),
                                   );
                                 },
@@ -133,7 +147,7 @@ class _EditHabitState extends State<EditHabit> {
                           ),
                         )
                       : Text(
-                          dataBox.getAt(index).name,
+                          dataBox.getAt(index).name.toString(),
                           style: GoogleFonts.openSans(
                             fontSize: 24,
                             fontWeight: FontWeight.w600,
@@ -215,19 +229,81 @@ class _EditHabitState extends State<EditHabit> {
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    Text(
-                      dataBox.getAt(index).minigoal < 60
-                          ? dataBox.getAt(index).minigoal.toString()
-                          : dataBox.getAt(index).minigoal < 3600
-                              ? (dataBox.getAt(index).minigoal / 60)
-                                  .toStringAsFixed(0)
-                              : (dataBox.getAt(index).minigoal / 60)
-                                  .toStringAsFixed(0),
-                      style: GoogleFonts.openSans(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    )
+                    isMiniGoalEditing
+                        ? Expanded(
+                            flex: 0,
+                            child: Container(
+                              width: 20,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                ),
+                                cursorColor: Colors.black,
+                                keyboardType: TextInputType.number,
+                                autofocus: true,
+                                style: GoogleFonts.openSans(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                controller: _minigoalController,
+                                onSubmitted: (newValue) {
+                                  setState(
+                                    () {
+                                      minigoalText = newValue;
+                                      isMiniGoalEditing = false;
+                                      dataBox.put(
+                                        widget.index,
+                                        MyHabitModel(
+                                          avgtime: dataBox.getAt(index).avgtime,
+                                          complete:
+                                              dataBox.getAt(index).complete,
+                                          minigoal: int.parse(newValue),
+                                          name: dataBox.getAt(index).name,
+                                          reminder:
+                                              dataBox.getAt(index).reminder,
+                                          todaytime:
+                                              dataBox.getAt(index).todaytime,
+                                          totaldays:
+                                              dataBox.getAt(index).totaldays,
+                                          totaltime:
+                                              dataBox.getAt(index).totaltime,
+                                          type: dataBox.getAt(index).type,
+                                          donedates:
+                                              dataBox.getAt(index).donedates,
+                                          everydaytime:
+                                              dataBox.getAt(index).donedates,
+                                          trackway:
+                                              dataBox.getAt(index).trackway,
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          )
+                        : InkWell(
+                            onTap: () {
+                              setState(() {
+                                isMiniGoalEditing = true;
+                              });
+                            },
+                            child: Text(
+                              dataBox.getAt(index).type == 'yes/no'
+                                  ? dataBox.getAt(index).minigoal.toString()
+                                  : dataBox.getAt(index).minigoal < 60
+                                      ? dataBox.getAt(index).minigoal.toString()
+                                      : dataBox.getAt(index).minigoal < 3600
+                                          ? (dataBox.getAt(index).minigoal / 60)
+                                              .toStringAsFixed(0)
+                                          : (dataBox.getAt(index).minigoal / 60)
+                                              .toStringAsFixed(0),
+                              style: GoogleFonts.openSans(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          )
                   ],
                 ),
               ),
@@ -254,7 +330,7 @@ class _EditHabitState extends State<EditHabit> {
                     items: items.map((String items) {
                       return DropdownMenuItem(
                         value: items,
-                        child: Text(items),
+                        child: Text(items.toString()),
                       );
                     }).toList(),
                     onChanged: (String newValue) {

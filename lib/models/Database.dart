@@ -96,6 +96,86 @@ class Database {
               ),
             ));
   }
+
+  static editMiniGoal(context, parentState) {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) => StatefulBuilder(
+              builder: (context, setState) => AlertDialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(11),
+                ),
+                actions: [
+                  RaisedButton(
+                    color: Colors.black,
+                    onPressed: () {
+                      parentState.setState(() {});
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      "Done",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+                title: Text("Edit Profile Photo",
+                    style: TextStyle(color: Colors.white)),
+                backgroundColor: Color(0xff2D2D2D),
+                content: SingleChildScrollView(
+                  child: Container(
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 70,
+                          child: PreferenceBuilder(
+                              preference: Database.prefs.getString(
+                                  "profilephotopath",
+                                  defaultValue: "none"),
+                              builder: (context, value) => CircleAvatar(
+                                  radius: 67,
+                                  backgroundImage: (value == "none")
+                                      ? null
+                                      : MemoryImage(
+                                          Uint8List.fromList(
+                                              File(value).readAsBytesSync()),
+                                        ))),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        RaisedButton(
+                          color: Colors.black,
+                          onPressed: () async {
+                            ImagePicker imagePicker = ImagePicker();
+                            PickedFile pic = await imagePicker.getImage(
+                                source: ImageSource.gallery);
+                            if (pic != null) {
+                              File profilePhoto = File(pic.path);
+                              File temp = await profilePhoto.copy(join(
+                                  (await getApplicationDocumentsDirectory())
+                                      .path,
+                                  'profilePhoto.jpg'));
+
+                              Database.prefs
+                                  .setString("profilephotopath", temp.path)
+                                  .then((_) {
+                                setState(() {});
+                              });
+                            }
+                          },
+                          child: Text(
+                            "Change Image",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ));
+  }
 }
 
 class Practice {

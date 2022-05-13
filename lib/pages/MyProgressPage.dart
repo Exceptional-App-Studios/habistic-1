@@ -103,16 +103,18 @@ class _ProgressPageState extends State<ProgressPage> {
                                       : Text(
                                           dataBox.getAt(index).todaytime < 60
                                               ? dataBox
-                                                  .getAt(index)
-                                                  .todaytime
-                                                  .toString()
+                                                      .getAt(index)
+                                                      .todaytime
+                                                      .toString() +
+                                                  ' secs'
                                               : dataBox.getAt(index).todaytime <
                                                       3600
                                                   ? (dataBox
-                                                              .getAt(index)
-                                                              .todaytime /
-                                                          60)
-                                                      .toStringAsFixed(0)
+                                                                  .getAt(index)
+                                                                  .todaytime /
+                                                              60)
+                                                          .toStringAsFixed(0) +
+                                                      ' mins'
                                                   : (dataBox
                                                               .getAt(index)
                                                               .todaytime /
@@ -138,7 +140,7 @@ class _ProgressPageState extends State<ProgressPage> {
                               ),
                               Column(
                                 children: [
-                                  ((dataBox.getAt(index).totaldays +
+                                  ((dataBox.getAt(index).totaltime +
                                                   dataBox
                                                       .getAt(index)
                                                       .todaytime) /
@@ -146,11 +148,11 @@ class _ProgressPageState extends State<ProgressPage> {
                                           .isNaN
                                       ? Text('0')
                                       : Text(
-                                          ((dataBox.getAt(index).totaldays /
+                                          ((dataBox.getAt(index).todaytime /
                                                       60 +
                                                   dataBox
                                                           .getAt(index)
-                                                          .todaytime /
+                                                          .totaldays /
                                                       60))
                                               .toStringAsFixed(1),
                                           style: GoogleFonts.openSans(
@@ -171,25 +173,44 @@ class _ProgressPageState extends State<ProgressPage> {
                               ),
                               Column(
                                 children: [
-                                  Text(
-                                    dataBox.getAt(index).totaltime < 60
-                                        ? dataBox
-                                            .getAt(index)
-                                            .totaltime
-                                            .toString()
-                                        : dataBox.getAt(index).totaltime < 3600
-                                            ? (dataBox.getAt(index).totaltime /
-                                                    60)
-                                                .toStringAsFixed(0)
-                                            : (dataBox.getAt(index).totaltime /
-                                                    60)
-                                                .toStringAsFixed(0),
-                                    style: GoogleFonts.openSans(
-                                      fontSize: 14,
-                                      color: HexColor('#777777'),
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
+                                  dataBox.getAt(index).type == "yes/no"
+                                      ? Text(
+                                          dataBox
+                                              .getAt(index)
+                                              .totaldays
+                                              .toString(),
+                                          style: GoogleFonts.openSans(
+                                            fontSize: 14,
+                                            color: HexColor('#777777'),
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        )
+                                      : Text(
+                                          dataBox.getAt(index).totaltime < 60
+                                              ? dataBox
+                                                      .getAt(index)
+                                                      .totaltime
+                                                      .toString() +
+                                                  ' secs'
+                                              : dataBox.getAt(index).totaltime <
+                                                      3600
+                                                  ? (dataBox
+                                                                  .getAt(index)
+                                                                  .totaltime /
+                                                              60)
+                                                          .toStringAsFixed(0) +
+                                                      ' mins'
+                                                  : (dataBox
+                                                              .getAt(index)
+                                                              .totaltime /
+                                                          60)
+                                                      .toStringAsFixed(0),
+                                          style: GoogleFonts.openSans(
+                                            fontSize: 14,
+                                            color: HexColor('#777777'),
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
                                   Text(
                                     'Total',
                                     style: GoogleFonts.openSans(
