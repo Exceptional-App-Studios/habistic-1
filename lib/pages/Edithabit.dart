@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hive/hive.dart';
@@ -59,7 +60,7 @@ class _EditHabitState extends State<EditHabit> {
   @override
   void dispose() {
     _editingController.dispose();
-    // _minigoalController.dispose();
+    _minigoalController.dispose();
     super.dispose();
   }
 
@@ -139,6 +140,7 @@ class _EditHabitState extends State<EditHabit> {
                                       everydaytime:
                                           dataBox.getAt(index).everydaytime,
                                       trackway: dataBox.getAt(index).trackway,
+                                      streak: dataBox.getAt(index).streak,
                                     ),
                                   );
                                 },
@@ -218,93 +220,109 @@ class _EditHabitState extends State<EditHabit> {
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 18.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Mini-Goal (Recommended)',
-                      style: GoogleFonts.openSans(
-                        fontSize: 15,
-                        color: HexColor('#777777'),
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    isMiniGoalEditing
-                        ? Expanded(
-                            flex: 0,
-                            child: Container(
-                              width: 20,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      isMiniGoalEditing = true;
+                    });
+                  },
+                  child: Container(
+                    height: 39,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Mini-Goal (Recommended)',
+                          style: GoogleFonts.openSans(
+                            fontSize: 15,
+                            color: HexColor('#777777'),
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        isMiniGoalEditing
+                            ? Expanded(
+                                flex: 0,
+                                child: Container(
+                                  width: 20,
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                    ),
+                                    cursorColor: Colors.black,
+                                    keyboardType: TextInputType.number,
+                                    autofocus: true,
+                                    style: GoogleFonts.openSans(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    controller: _minigoalController,
+                                    onSubmitted: (newValue) {
+                                      setState(
+                                        () {
+                                          minigoalText = newValue;
+                                          isMiniGoalEditing = false;
+                                          dataBox.put(
+                                            widget.index,
+                                            MyHabitModel(
+                                              avgtime:
+                                                  dataBox.getAt(index).avgtime,
+                                              complete:
+                                                  dataBox.getAt(index).complete,
+                                              minigoal: int.parse(newValue),
+                                              name: dataBox.getAt(index).name,
+                                              reminder:
+                                                  dataBox.getAt(index).reminder,
+                                              todaytime: dataBox
+                                                  .getAt(index)
+                                                  .todaytime,
+                                              totaldays: dataBox
+                                                  .getAt(index)
+                                                  .totaldays,
+                                              totaltime: dataBox
+                                                  .getAt(index)
+                                                  .totaltime,
+                                              type: dataBox.getAt(index).type,
+                                              donedates: dataBox
+                                                  .getAt(index)
+                                                  .donedates,
+                                              everydaytime: dataBox
+                                                  .getAt(index)
+                                                  .donedates,
+                                              trackway:
+                                                  dataBox.getAt(index).trackway,
+                                              streak:
+                                                  dataBox.getAt(index).streak,
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
                                 ),
-                                cursorColor: Colors.black,
-                                keyboardType: TextInputType.number,
-                                autofocus: true,
+                              )
+                            : Text(
+                                dataBox.getAt(index).type == 'yes/no'
+                                    ? dataBox.getAt(index).minigoal.toString()
+                                    : dataBox.getAt(index).minigoal < 60
+                                        ? dataBox
+                                            .getAt(index)
+                                            .minigoal
+                                            .toString()
+                                        : dataBox.getAt(index).minigoal < 3600
+                                            ? (dataBox.getAt(index).minigoal /
+                                                    60)
+                                                .toStringAsFixed(0)
+                                            : (dataBox.getAt(index).minigoal /
+                                                    60)
+                                                .toStringAsFixed(0),
                                 style: GoogleFonts.openSans(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600,
                                 ),
-                                controller: _minigoalController,
-                                onSubmitted: (newValue) {
-                                  setState(
-                                    () {
-                                      minigoalText = newValue;
-                                      isMiniGoalEditing = false;
-                                      dataBox.put(
-                                        widget.index,
-                                        MyHabitModel(
-                                          avgtime: dataBox.getAt(index).avgtime,
-                                          complete:
-                                              dataBox.getAt(index).complete,
-                                          minigoal: int.parse(newValue),
-                                          name: dataBox.getAt(index).name,
-                                          reminder:
-                                              dataBox.getAt(index).reminder,
-                                          todaytime:
-                                              dataBox.getAt(index).todaytime,
-                                          totaldays:
-                                              dataBox.getAt(index).totaldays,
-                                          totaltime:
-                                              dataBox.getAt(index).totaltime,
-                                          type: dataBox.getAt(index).type,
-                                          donedates:
-                                              dataBox.getAt(index).donedates,
-                                          everydaytime:
-                                              dataBox.getAt(index).donedates,
-                                          trackway:
-                                              dataBox.getAt(index).trackway,
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
                               ),
-                            ),
-                          )
-                        : InkWell(
-                            onTap: () {
-                              setState(() {
-                                isMiniGoalEditing = true;
-                              });
-                            },
-                            child: Text(
-                              dataBox.getAt(index).type == 'yes/no'
-                                  ? dataBox.getAt(index).minigoal.toString()
-                                  : dataBox.getAt(index).minigoal < 60
-                                      ? dataBox.getAt(index).minigoal.toString()
-                                      : dataBox.getAt(index).minigoal < 3600
-                                          ? (dataBox.getAt(index).minigoal / 60)
-                                              .toStringAsFixed(0)
-                                          : (dataBox.getAt(index).minigoal / 60)
-                                              .toStringAsFixed(0),
-                              style: GoogleFonts.openSans(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          )
-                  ],
+                      ],
+                    ),
+                  ),
                 ),
               ),
               SizedBox(height: 15),
@@ -341,26 +359,33 @@ class _EditHabitState extends State<EditHabit> {
                   )
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Launch timer by default',
-                    style: GoogleFonts.openSans(
-                      fontSize: 15,
-                      color: HexColor('#777777'),
-                      fontWeight: FontWeight.w400,
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Launch timer by default',
+                      style: GoogleFonts.openSans(
+                        fontSize: 15,
+                        color: HexColor('#777777'),
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                  ),
-                  Switch(
-                      value: timerdefault,
-                      activeColor: HexColor('#5353FF'),
-                      onChanged: (value) {
-                        setState(() {
-                          timerdefault = value;
-                        });
-                      })
-                ],
+                    Switch(
+                        value: timerdefault,
+                        activeColor: HexColor('#5353FF'),
+                        onChanged: (value) {
+                          if (dataBox.getAt(index).type == 'yes/no') {
+                            Fluttertoast.showToast(
+                                msg: 'Habit cannot contain timer');
+                          } else {
+                            setState(() {
+                              timerdefault = value;
+                            });
+                          }
+                        })
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),

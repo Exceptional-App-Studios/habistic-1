@@ -5,6 +5,7 @@ import 'package:habisitic/pages/MyHabitsPage.dart';
 import 'package:habisitic/pages/MyProgressPage.dart';
 import 'package:habisitic/pages/PremiumPage.dart';
 import 'package:habisitic/pages/SettingsPage.dart';
+import 'package:habisitic/services/notification_service.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
@@ -16,6 +17,7 @@ const String dataBoxName = "data";
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final document = await getApplicationDocumentsDirectory();
+  Database.initialize();
   Hive.init(document.path);
   Hive.registerAdapter(MyHabitModelAdapter());
   await Hive.openBox<MyHabitModel>(dataBoxName);
@@ -31,6 +33,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    materialButton = _nextButton;
+    NotificationApi.init();
+    super.initState();
+  }
+
   Material materialButton;
 
   final onboardingPagesList = [
@@ -179,12 +188,6 @@ class _MyAppState extends State<MyApp> {
       ),
     ),
   ];
-
-  @override
-  void initState() {
-    materialButton = _nextButton;
-    super.initState();
-  }
 
   set _buildButton(int pageIndex) {
     if (pageIndex == 0) {
