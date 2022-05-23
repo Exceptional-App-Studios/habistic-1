@@ -1,54 +1,53 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 
-class HealthHabitList {
-  List<HealthHabits> health;
-  HealthHabitList({
-    this.health,
+class SuccessHabitList {
+  final List<SuccessHabits> success;
+  SuccessHabitList({
+    this.success,
   });
 
-  HealthHabitList copyWith({
-    List<HealthHabits> health,
+  SuccessHabitList copyWith({
+    List<SuccessHabits> success,
   }) {
-    return HealthHabitList(
-      health: health ?? this.health,
+    return SuccessHabitList(
+      success: success ?? this.success,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'health': health.map((x) => x.toMap()).toList(),
+      'success': success.map((x) => x.toMap()).toList(),
     };
   }
 
-  factory HealthHabitList.fromMap(Map<String, dynamic> map) {
-    return HealthHabitList(
-      health: List<HealthHabits>.from(
-          map['health']?.map((x) => HealthHabits.fromMap(x))),
+  factory SuccessHabitList.fromMap(Map<String, dynamic> map) {
+    return SuccessHabitList(
+      success: List<SuccessHabits>.from(
+          map['success']?.map((x) => SuccessHabits.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory HealthHabitList.fromJson(String source) =>
-      HealthHabitList.fromMap(json.decode(source));
+  factory SuccessHabitList.fromJson(String source) =>
+      SuccessHabitList.fromMap(json.decode(source));
 
   @override
-  String toString() => 'HealthHabitList(health: $health)';
+  String toString() => 'SuccessHabitList(success: $success)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is HealthHabitList && listEquals(other.health, health);
+    return other is SuccessHabitList && listEquals(other.success, success);
   }
 
   @override
-  int get hashCode => health.hashCode;
+  int get hashCode => success.hashCode;
 }
 
-class HealthHabits {
+class SuccessHabits {
   final int id;
   final String habitname;
   final String benefit1;
@@ -60,7 +59,7 @@ class HealthHabits {
   final String trackway;
   final String type;
   final String image;
-  HealthHabits({
+  SuccessHabits({
     this.id,
     this.habitname,
     this.benefit1,
@@ -74,7 +73,7 @@ class HealthHabits {
     this.image,
   });
 
-  HealthHabits copyWith({
+  SuccessHabits copyWith({
     int id,
     String habitname,
     String benefit1,
@@ -87,7 +86,7 @@ class HealthHabits {
     String type,
     String image,
   }) {
-    return HealthHabits(
+    return SuccessHabits(
       id: id ?? this.id,
       habitname: habitname ?? this.habitname,
       benefit1: benefit1 ?? this.benefit1,
@@ -118,8 +117,8 @@ class HealthHabits {
     };
   }
 
-  factory HealthHabits.fromMap(Map<String, dynamic> map) {
-    return HealthHabits(
+  factory SuccessHabits.fromMap(Map<String, dynamic> map) {
+    return SuccessHabits(
       id: map['id']?.toInt() ?? 0,
       habitname: map['habitname'] ?? '',
       benefit1: map['benefit1'] ?? '',
@@ -136,19 +135,19 @@ class HealthHabits {
 
   String toJson() => json.encode(toMap());
 
-  factory HealthHabits.fromJson(String source) =>
-      HealthHabits.fromMap(json.decode(source));
+  factory SuccessHabits.fromJson(String source) =>
+      SuccessHabits.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'HealthHabits(id: $id, habitname: $habitname, benefit1: $benefit1, benefit2: $benefit2, benefit3: $benefit3, benefit4: $benefit4, benefit5: $benefit5, minigoal: $minigoal, trackway: $trackway, type: $type, image: $image)';
+    return 'SuccessHabits(id: $id, habitname: $habitname, benefit1: $benefit1, benefit2: $benefit2, benefit3: $benefit3, benefit4: $benefit4, benefit5: $benefit5, minigoal: $minigoal, trackway: $trackway, type: $type, image: $image)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is HealthHabits &&
+    return other is SuccessHabits &&
         other.id == id &&
         other.habitname == habitname &&
         other.benefit1 == benefit1 &&

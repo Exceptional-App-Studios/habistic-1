@@ -2,61 +2,66 @@
     "success" : [
         {
             "id": 0,   
-            "habit-name": "Reading Self-Help books",
-            "benefit-1": "",
-            "benefit-2": "",
-            "benefit-3": "",
-            "benefit-4": "",
-            "benefit-5": "",
+            "habitname": "Reading Self-Help books",
+            "benefit1": "Increase your self-belief",
+            "benefit2": "Increase your clarity and focus",
+            "benefit3": "Open your mind to new approaches",
+            "benefit4": "Be inspired to make better choices",
+            "benefit5": "Smash through your limitations",
             "minigoal": 2,
+            "trackway": "Pages",
             "type": "yes/no",
-            "image": "assets/nature-sounds.png"
+            "image": "https://img-cdn.inc.com/image/upload/w_1920,h_1080,c_fill/images/panoramic/GettyImages-577674005_492115_zfpgiw.jpg"
         },
         {
             "id": 1,   
-            "habit-name": "Listening to podcast",
-            "benefit-1": "",
-            "benefit-2": "",
-            "benefit-3": "",
-            "benefit-4": "",
-            "benefit-5": "",
+            "habitname": "Listening to podcast",
+            "benefit1": "Helps reduce stress",
+            "benefit2": "Improve focus and attention",
+            "benefit3": "Boost your mood",
+            "benefit4": "Encourages imagination",
+            "benefit5": "Improves your vocabulary",
             "minigoal": 600,
+            "trackway": "Minutes",
             "type": "track",
-            "image": "assets/nature-sounds.png"
+            "image": "https://images.ctfassets.net/yqwtwibiobs4/6ZvqKhJp31iOxGLFgEMd3n/79171fded8585abe36aeadb499ee29d8/Listening_to_podcast_800px_x_451px__1_.jpg"
         },
         {
             "id": 2,   
-            "habit-name": "Set Daily priorities",
-            "benefit-1": "",
-            "benefit-2": "",
-            "benefit-3": "",
-            "benefit-4": "",
-            "benefit-5": "",   
+            "habitname": "Set Daily priorities",
+            "benefit1": "Feel More Accomplished",
+            "benefit2": "Get more time back",
+            "benefit3": "Avoid procrastination ",
+            "benefit4": "Focus on most important work",
+            "benefit5": "Increases productivity", 
+            "trackway": "",
             "type": "yes/no",
-            "image": "assets/nature-sounds.png"
+            "image": "https://www.wikihow.com/images/thumb/2/22/Set-Daily-Goals-Step-4-Version-2.jpg/v4-460px-Set-Daily-Goals-Step-4-Version-2.jpg.webp"
         },
         {
             "id": 3,   
-            "habit-name": "Wake Up Early",
-            "benefit-1": "",
-            "benefit-2": "",
-            "benefit-3": "",
-            "benefit-4": "",
-            "benefit-5": "",
+            "habitname": "Wake Up Early",
+            "benefit1": "Brighten your day",
+            "benefit2": "Healthier Skin",
+            "benefit3": "Helps you concentrate",
+            "benefit4": "Be more Energetic",
+            "benefit5": "Feel Happier",
             "type": "yes/no",
-            "image": "assets/nature-sounds.png"
+            "trackway": "",
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWBu_IoJHHW00ucoQY9JbW_-H10ZniCNRwrg&usqp=CAU"
         },
         {
             "id": 3,   
-            "habit-name": "Learn Something new",
-            "benefit-1": "",
-            "benefit-2": "",
-            "benefit-3": "",
-            "benefit-4": "",
-            "benefit-5": "",
+            "habitname": "Learn Something new",
+            "benefit1": "Be a better you",
+            "benefit2": "Improve your brain function",
+            "benefit3": "Enhance your quality of life",
+            "benefit4": "Gain confidence",
+            "benefit5": "Improve your mental health",
             "minigoal": 300,
             "type": "track",
-            "image": "assets/nature-sounds.png"
+            "trackway": "Minutes",
+            "image": "https://i.guim.co.uk/img/media/4bfd1f5c9e7f2e525043dc55f20ad573f6b42563/0_356_5381_3231/master/5381..jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=0c250b33583f87935ed08ecbba0a4a4a"
         }
     ]
 }

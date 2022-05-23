@@ -38,6 +38,7 @@ class _TimerPageState extends State<TimerPage> {
 
     habit = widget.habits;
     duration = widget.duration * 60;
+    print(duration);
 
     Timer.periodic(Duration(seconds: 1), (_) {
       setState(() {

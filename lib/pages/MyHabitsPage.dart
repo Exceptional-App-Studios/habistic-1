@@ -15,6 +15,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 import '../main.dart';
 import '../models/Database.dart';
+import '../services/notification_service.dart';
 
 // const String dataBoxName = "data";
 
@@ -40,6 +41,7 @@ class _MyHabitsPageState extends State<MyHabitsPage> {
     dataBox = Hive.box<MyHabitModel>(dataBoxName);
     super.initState();
     Practice.checkPractice();
+    CheckStreak.calBestStreak();
   }
 
   DataFilter filter = DataFilter.ALL;
@@ -56,6 +58,13 @@ class _MyHabitsPageState extends State<MyHabitsPage> {
           size: 27,
         ),
         onPressed: () {
+          // NotificationApi.showScheduledNotification(
+          //   body: "Time to be a better you",
+          //   id: 0,
+          //   scheduleDate: DateTime.now().add(Duration(seconds: 5)),
+          //   title: 'Time to a better you',
+          // );
+
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -290,7 +299,7 @@ class _MyHabitsPageState extends State<MyHabitsPage> {
                                       ],
                                     ),
                                     Text(
-                                      data.totaldays.toString() + ' 🔥',
+                                      data.streak.toString() + ' 🔥',
                                       style: GoogleFonts.openSans(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,
@@ -323,6 +332,9 @@ class _MyHabitsPageState extends State<MyHabitsPage> {
                                         totaltime: data.totaltime + 1,
                                         type: data.type,
                                         donedates: data.donedates + [date],
+                                        everydaytime: data.everydaytime + ['1'],
+                                        trackway: data.trackway,
+                                        streak: data.streak + 1,
                                       ),
                                     );
                                   });
@@ -485,7 +497,7 @@ class _MyHabitsPageState extends State<MyHabitsPage> {
                                             ],
                                           ),
                                           Text(
-                                            data.totaldays.toString() + ' 🔥',
+                                            data.streak.toString() + ' 🔥',
                                             style: GoogleFonts.openSans(
                                               fontSize: 13,
                                               fontWeight: FontWeight.w600,
@@ -530,7 +542,8 @@ class _TrackProgressState extends State<TrackProgress> {
   void initState() {
     habit = widget.habitModel;
     dataBox = Hive.box<MyHabitModel>(dataBoxName);
-    // trackController.text = track.toString();
+    _currentCount = dataBox.getAt(widget.index).minigoal ~/ 60;
+
     super.initState();
   }
 
@@ -553,7 +566,7 @@ class _TrackProgressState extends State<TrackProgress> {
     );
   }
 
-  int _currentCount = 2;
+  int _currentCount;
 
   void _increment() {
     setState(() {
@@ -600,24 +613,12 @@ class _TrackProgressState extends State<TrackProgress> {
                   children: [
                     _createIncrementDicrementButton(
                         Icons.remove, () => _dicrement()),
-
                     Text(
                       _currentCount.toString(),
                       style: GoogleFonts.roboto(
                         fontSize: 40,
                       ),
                     ),
-
-                    // Container(
-                    //   width: 70,
-                    //   child: TextField(
-
-                    //     keyboardType: TextInputType.number,
-                    //     textAlign: TextAlign.center,
-                    //   ),
-                    // ),
-                    // ),
-
                     _createIncrementDicrementButton(
                         Icons.add, () => _increment()),
                   ],
@@ -625,7 +626,14 @@ class _TrackProgressState extends State<TrackProgress> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 80, bottom: 10),
+              padding: const EdgeInsets.only(top: 14.0),
+              child: Text(
+                dataBox.getAt(widget.index).trackway.toString(),
+                style: GoogleFonts.roboto(fontSize: 25),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 50, bottom: 10),
               child: GestureDetector(
                 onTap: () async {
                   dataBox.put(
@@ -641,6 +649,10 @@ class _TrackProgressState extends State<TrackProgress> {
                       totaltime: habit.totaltime + _currentCount * 60,
                       type: habit.type,
                       donedates: habit.donedates + [date],
+                      everydaytime: habit.everydaytime +
+                          [(_currentCount * 60).toString()],
+                      trackway: habit.trackway,
+                      streak: habit.streak + 1,
                     ),
                   );
                   Navigator.pop(context);

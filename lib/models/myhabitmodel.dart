@@ -28,6 +28,8 @@ class MyHabitModel extends HiveObject {
   List<String> everydaytime;
   @HiveField(11)
   String trackway;
+  @HiveField(12)
+  int streak;
 
   MyHabitModel({
     this.name,
@@ -42,5 +44,6 @@ class MyHabitModel extends HiveObject {
     this.donedates,
     this.everydaytime,
     this.trackway,
+    this.streak,
   });
 }
