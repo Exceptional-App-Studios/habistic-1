@@ -25,7 +25,7 @@ class MyHabitModel extends HiveObject {
   @HiveField(9)
   List<String> donedates;
   @HiveField(10)
-  List<String> everydaytime;
+  List<num> everydaytime;
   @HiveField(11)
   String trackway;
   @HiveField(12)

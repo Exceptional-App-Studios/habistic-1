@@ -230,10 +230,6 @@ class _MyHabitsPageState extends State<MyHabitsPage> {
 
                 if (filter == DataFilter.ALL) {
                   keys = items.keys.cast<int>().toList();
-                  // keys = items.keys
-                  //     .cast<int>()
-                  //     .where((key) => !items.getAt(key).complete)
-                  //     .toList();
                 }
                 {
                   keys = items.keys
@@ -332,7 +328,7 @@ class _MyHabitsPageState extends State<MyHabitsPage> {
                                         totaltime: data.totaltime + 1,
                                         type: data.type,
                                         donedates: data.donedates + [date],
-                                        everydaytime: data.everydaytime + ['1'],
+                                        everydaytime: data.everydaytime + [1],
                                         trackway: data.trackway,
                                         streak: data.streak + 1,
                                       ),
@@ -441,7 +437,6 @@ class _MyHabitsPageState extends State<MyHabitsPage> {
                                       splashColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
                                       onTap: () {
-                                        // print(data.donedates);
                                         Navigator.of(context).push(
                                           MaterialPageRoute(
                                             builder: (context) => EditHabit(
@@ -649,8 +644,7 @@ class _TrackProgressState extends State<TrackProgress> {
                       totaltime: habit.totaltime + _currentCount * 60,
                       type: habit.type,
                       donedates: habit.donedates + [date],
-                      everydaytime: habit.everydaytime +
-                          [(_currentCount * 60).toString()],
+                      everydaytime: habit.everydaytime + [(_currentCount * 60)],
                       trackway: habit.trackway,
                       streak: habit.streak + 1,
                     ),

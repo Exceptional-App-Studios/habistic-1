@@ -27,7 +27,7 @@ class MyHabitModelAdapter extends TypeAdapter<MyHabitModel> {
       avgtime: fields[7] as int,
       minigoal: fields[8] as int,
       donedates: (fields[9] as List)?.cast<String>(),
-      everydaytime: (fields[10] as List)?.cast<String>(),
+      everydaytime: (fields[10] as List)?.cast<num>(),
       trackway: fields[11] as String,
       streak: fields[12] as int,
     );
