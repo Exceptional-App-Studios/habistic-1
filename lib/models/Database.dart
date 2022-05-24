@@ -236,10 +236,7 @@ class CheckStreak {
         String string = dateFormat.format(DateTime.now());
         DateTime now = dateFormat.parse(string);
         int difference = now.difference(pre).inDays;
-        print("Now: $now");
-        print("Pre: $pre");
-        print("String: $string");
-        print("Difference: $difference");
+
         if (difference > 1) {
           dataBox.putAt(
             i,
@@ -259,7 +256,6 @@ class CheckStreak {
               streak: 0,
             ),
           );
-          // print(streak);
         }
         pre = now;
       }

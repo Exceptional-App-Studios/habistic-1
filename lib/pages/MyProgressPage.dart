@@ -3,8 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habisitic/main.dart';
 import 'package:habisitic/models/myhabitmodel.dart';
 import 'package:hexcolor/hexcolor.dart';
-
+import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:hive_flutter/hive_flutter.dart';
+
+import '../models/progresschart_model.dart';
 
 class ProgressPage extends StatefulWidget {
   const ProgressPage({Key key}) : super(key: key);
@@ -16,6 +18,7 @@ class ProgressPage extends StatefulWidget {
 class _ProgressPageState extends State<ProgressPage> {
   Box<MyHabitModel> dataBox;
   List<String> data1;
+  List<String> everydaytime;
 
   @override
   void initState() {
@@ -70,6 +73,19 @@ class _ProgressPageState extends State<ProgressPage> {
                   itemCount: items.length,
                   itemBuilder: (_, index) {
                     final MyHabitModel data = items.getAt(index);
+                    List<String> donedates = data.donedates;
+
+                    List<charts.Series<MyHabitModel, String>> series = [
+                      charts.Series(
+                        id: "Subscribers",
+                        data: dataBox.values.toList(),
+                        domainFn: (MyHabitModel series, _) =>
+                            donedates.toString(),
+                        measureFn: (MyHabitModel series, _) =>
+                            dataBox.getAt(index).minigoal,
+                        seriesColor: charts.Color(r: 83, g: 83, b: 255),
+                      )
+                    ];
                     return Column(
                       children: [
                         Container(
@@ -98,11 +114,12 @@ class _ProgressPageState extends State<ProgressPage> {
                                   ],
                                 ),
                               ),
-                              Text(
-                                dataBox.getAt(index).donedates.toString(),
-                              ),
-                              Text(
-                                dataBox.getAt(index).everydaytime.toString(),
+                              Container(
+                                height: 200,
+                                child: charts.BarChart(
+                                  series,
+                                  animate: true,
+                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(
