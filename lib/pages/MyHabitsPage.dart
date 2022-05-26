@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habisitic/models/myhabitmodel.dart';
 import 'package:habisitic/pages/CreateHabit.dart';
@@ -32,9 +33,10 @@ enum DataFilter { ALL, COMPLETED, PROGRESS }
 
 class _MyHabitsPageState extends State<MyHabitsPage> {
   Box<MyHabitModel> dataBox;
+  ExpandableController expandableController;
 
-  String date = DateFormat("dd-MM-yyy").format(DateTime.now());
-  String previousdate = DateFormat('dd-MM-yyy')
+  String date = DateFormat("dd-MM-yyyy").format(DateTime.now());
+  String previousdate = DateFormat('dd-MM-yyyy')
       .format(DateTime.now().subtract(Duration(days: 1)));
   @override
   void initState() {
@@ -280,7 +282,9 @@ class _MyHabitsPageState extends State<MyHabitsPage> {
                                           style: GoogleFonts.openSans(
                                             fontSize: 17,
                                             fontWeight: FontWeight.w600,
-                                            color: Colors.black,
+                                            color: data.skipped
+                                                ? Colors.grey
+                                                : Colors.black,
                                           ),
                                         ),
                                         SizedBox(height: 10),
@@ -289,7 +293,9 @@ class _MyHabitsPageState extends State<MyHabitsPage> {
                                           style: GoogleFonts.roboto(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w400,
-                                            color: HexColor('#777777'),
+                                            color: data.skipped
+                                                ? Colors.grey
+                                                : HexColor('#777777'),
                                           ),
                                         ),
                                       ],
@@ -299,7 +305,9 @@ class _MyHabitsPageState extends State<MyHabitsPage> {
                                       style: GoogleFonts.openSans(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,
-                                        color: Colors.black,
+                                        color: data.skipped
+                                            ? Colors.grey
+                                            : Colors.black,
                                       ),
                                     ),
                                   ],
@@ -313,33 +321,25 @@ class _MyHabitsPageState extends State<MyHabitsPage> {
                               splashColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () {
-                                if (data.type == 'yes/no') {
-                                  setState(() {
-                                    dataBox.put(
-                                      key,
-                                      MyHabitModel(
-                                        name: data.name,
-                                        avgtime: data.avgtime,
-                                        complete: true,
-                                        minigoal: data.minigoal,
-                                        reminder: data.reminder,
-                                        todaytime: data.todaytime + 1,
-                                        totaldays: data.totaldays + 1,
-                                        totaltime: data.totaltime + 1,
-                                        type: data.type,
-                                        donedates: data.donedates + [date],
-                                        everydaytime: data.everydaytime + [1],
-                                        trackway: data.trackway,
-                                        streak: data.streak + 1,
+                                if (data.skipped) {
+                                  Fluttertoast.showToast(
+                                      msg: 'You Skipped today');
+                                } else {
+                                  if (data.type == 'yes/no') {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => TrackYesNoProgress(
+                                        habitModel: data,
+                                        index: key,
                                       ),
                                     );
-                                  });
-                                } else if (data.type == 'track') {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => TrackProgress(
-                                        habitModel: data, index: key),
-                                  );
+                                  } else if (data.type == 'track') {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => TrackProgress(
+                                          habitModel: data, index: key),
+                                    );
+                                  }
                                 }
                               },
                               child: Container(
@@ -353,9 +353,20 @@ class _MyHabitsPageState extends State<MyHabitsPage> {
                                       height: 24.0,
                                       decoration: new BoxDecoration(
                                         color: Colors.white,
-                                        border: Border.all(color: Colors.black),
+                                        border: Border.all(
+                                          color: data.skipped
+                                              ? Colors.grey
+                                              : Colors.black,
+                                        ),
                                         shape: BoxShape.circle,
                                       ),
+                                      child: data.skipped
+                                          ? Icon(
+                                              Icons.lock,
+                                              size: 15,
+                                              color: Colors.grey,
+                                            )
+                                          : Container(),
                                     )
                                   ],
                                 ),
@@ -382,15 +393,22 @@ class _MyHabitsPageState extends State<MyHabitsPage> {
                           .cast<int>()
                           .where((key) => items.getAt(key).complete)
                           .toList();
+
+                      expandableController =
+                          ExpandableController(initialExpanded: true);
                     } else {
                       keys = items.keys
                           .cast<int>()
                           .where((key) => items.get(key).complete)
                           .toList();
+
+                      expandableController =
+                          ExpandableController(initialExpanded: true);
                     }
                     return ExpandablePanel(
+                      controller: expandableController,
                       theme: ExpandableThemeData(
-                        // tapHeaderToExpand: true,
+                        tapHeaderToExpand: true,
                         // collapseIcon: Icons.arrow_drop_up_sharp,
                         hasIcon: false,
                         // expandIcon: Icons.arrow_drop_down_sharp,
@@ -398,6 +416,7 @@ class _MyHabitsPageState extends State<MyHabitsPage> {
                         tapBodyToCollapse: true,
                         tapBodyToExpand: true,
                         useInkWell: false,
+
                         // iconPlacement: ExpandablePanelIconPlacement.left,
                         headerAlignment: ExpandablePanelHeaderAlignment.center,
                       ),
@@ -544,7 +563,7 @@ class _TrackProgressState extends State<TrackProgress> {
 
   Box<MyHabitModel> dataBox;
   final TextEditingController trackController = new TextEditingController();
-  String date = DateFormat("dd-MM-yyy").format(DateTime.now());
+  String date = DateFormat("dd-MM-yyyy").format(DateTime.now());
 
   // int track = habit.totaldays;
 
@@ -634,6 +653,7 @@ class _TrackProgressState extends State<TrackProgress> {
                   dataBox.put(
                     widget.index,
                     MyHabitModel(
+                      skipped: false,
                       name: habit.name,
                       avgtime: habit.avgtime,
                       complete: true,
@@ -707,6 +727,199 @@ class _TrackProgressState extends State<TrackProgress> {
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () {
+                Navigator.pop(context);
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Text(
+                  'Skip',
+                  style: GoogleFonts.openSans(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class TrackYesNoProgress extends StatefulWidget {
+  final MyHabitModel habitModel;
+  final int index;
+  const TrackYesNoProgress({Key key, this.habitModel, this.index})
+      : super(key: key);
+
+  @override
+  State<TrackYesNoProgress> createState() => _TrackYesNoProgressState();
+}
+
+var yesnohabit;
+
+class _TrackYesNoProgressState extends State<TrackYesNoProgress> {
+  @override
+  void initState() {
+    yesnohabit = widget.habitModel;
+    dataBox = Hive.box<MyHabitModel>(dataBoxName);
+    _currentCount = dataBox.getAt(widget.index).minigoal;
+
+    super.initState();
+  }
+
+  Box<MyHabitModel> dataBox;
+  final TextEditingController trackController = new TextEditingController();
+  String date = DateFormat("dd-MM-yyyy").format(DateTime.now());
+
+  // int track = habit.totaldays;
+
+  Widget _createIncrementDicrementButton(IconData icon, Function onPressed) {
+    return InkWell(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onTap: onPressed,
+      child: Icon(
+        icon,
+        color: Colors.black,
+        size: 34,
+      ),
+    );
+  }
+
+  int _currentCount;
+
+  void _increment() {
+    setState(() {
+      _currentCount++;
+      // _counterCallback(_currentCount);
+    });
+  }
+
+  void _dicrement() {
+    setState(() {
+      if (_currentCount > 1) {
+        _currentCount--;
+        // _counterCallback(_currentCount);
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              yesnohabit.name,
+              style: GoogleFonts.openSans(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 60.0),
+              child: Container(
+                width: 180,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _createIncrementDicrementButton(
+                        Icons.remove, () => _dicrement()),
+                    Text(
+                      _currentCount.toString(),
+                      style: GoogleFonts.roboto(
+                        fontSize: 40,
+                      ),
+                    ),
+                    _createIncrementDicrementButton(
+                        Icons.add, () => _increment()),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 14.0),
+              child: Text(
+                dataBox.getAt(widget.index).trackway.toString(),
+                style: GoogleFonts.roboto(fontSize: 25),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 50, bottom: 10),
+              child: GestureDetector(
+                onTap: () async {
+                  dataBox.put(
+                    widget.index,
+                    MyHabitModel(
+                      name: yesnohabit.name,
+                      avgtime: yesnohabit.avgtime,
+                      complete: true,
+                      minigoal: yesnohabit.minigoal,
+                      reminder: yesnohabit.reminder,
+                      todaytime: yesnohabit.todaytime + 1,
+                      totaldays: yesnohabit.totaldays + 1,
+                      totaltime: yesnohabit.totaltime + 1,
+                      type: yesnohabit.type,
+                      donedates: yesnohabit.donedates + [date],
+                      everydaytime: yesnohabit.everydaytime + [_currentCount],
+                      trackway: yesnohabit.trackway,
+                      streak: yesnohabit.streak + 1,
+                      skipped: false,
+                    ),
+                  );
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width / 1.7,
+                  height: 56,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Save Progress',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () {
+                dataBox.put(
+                  widget.index,
+                  MyHabitModel(
+                    name: yesnohabit.name,
+                    avgtime: yesnohabit.avgtime,
+                    complete: false,
+                    minigoal: yesnohabit.minigoal,
+                    reminder: yesnohabit.reminder,
+                    todaytime: yesnohabit.todaytime,
+                    totaldays: yesnohabit.totaldays,
+                    totaltime: yesnohabit.totaltime,
+                    type: yesnohabit.type,
+                    donedates: yesnohabit.donedates + [date],
+                    everydaytime: yesnohabit.everydaytime + [0],
+                    trackway: yesnohabit.trackway,
+                    streak: 0,
+                    skipped: true,
+                  ),
+                );
                 Navigator.pop(context);
               },
               child: Padding(

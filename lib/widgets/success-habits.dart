@@ -351,6 +351,8 @@ class _SuccessHabitState extends State<SuccessHabit> {
                                                                       donedates: [],
                                                                       everydaytime: [],
                                                                       streak: 0,
+                                                                      skipped:
+                                                                          false,
                                                                     );
 
                                                                     await dataBox

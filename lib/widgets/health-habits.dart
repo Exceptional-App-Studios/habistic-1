@@ -33,7 +33,7 @@ class _HealthHabitState extends State<HealthHabit> {
   fetchHealth() async {
     final healthJson = await rootBundle.loadString("assets/health.json");
     health = HealthHabitList.fromJson(healthJson).health;
-    print(health);
+
     setState(() {});
   }
 
@@ -351,6 +351,8 @@ class _HealthHabitState extends State<HealthHabit> {
                                                                       donedates: [],
                                                                       everydaytime: [],
                                                                       streak: 0,
+                                                                      skipped:
+                                                                          false,
                                                                     );
 
                                                                     await dataBox

@@ -351,13 +351,13 @@ class _HappyHabitState extends State<HappyHabit> {
                                                                       donedates: [],
                                                                       everydaytime: [],
                                                                       streak: 0,
+                                                                      skipped:
+                                                                          false,
                                                                     );
 
                                                                     await dataBox
                                                                         .add(
                                                                             data);
-                                                                    Navigator.pop(
-                                                                        context);
                                                                     Navigator.pop(
                                                                         context);
                                                                   },

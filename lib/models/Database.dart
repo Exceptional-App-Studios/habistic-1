@@ -212,6 +212,7 @@ class Practice {
             trackway: dataBox.getAt(i).trackway,
             everydaytime: dataBox.getAt(i).everydaytime,
             streak: dataBox.getAt(i).streak,
+            skipped: false,
           ),
         );
       }
