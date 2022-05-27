@@ -27,16 +27,16 @@ class MyHabitModelAdapter extends TypeAdapter<MyHabitModel> {
       avgtime: fields[7] as int,
       minigoal: fields[8] as int,
       donedates: (fields[9] as List)?.cast<String>(),
-      everydaytime: (fields[10] as List)?.cast<num>(),
+      everydaytime: (fields[10] as List)?.cast<int>(),
       trackway: fields[11] as String,
       streak: fields[12] as int,
-    );
+    )..skipped = fields[13] as bool;
   }
 
   @override
   void write(BinaryWriter writer, MyHabitModel obj) {
     writer
-      ..writeByte(13)
+      ..writeByte(14)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -62,7 +62,9 @@ class MyHabitModelAdapter extends TypeAdapter<MyHabitModel> {
       ..writeByte(11)
       ..write(obj.trackway)
       ..writeByte(12)
-      ..write(obj.streak);
+      ..write(obj.streak)
+      ..writeByte(13)
+      ..write(obj.skipped);
   }
 
   @override

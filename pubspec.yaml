@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ">=2.11.0 <3.0.0"
@@ -28,7 +28,6 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cached_network_image: ^3.2.1
-  charts_flutter: ^0.12.0
   circular_countdown_timer: ^0.2.1
   cupertino_icons: ^1.0.2
   expandable: ^5.0.1
@@ -48,6 +47,7 @@ dependencies:
   rxdart: ^0.27.3
   shared_preferences: ^2.0.13
   streaming_shared_preferences: ^2.0.0
+  syncfusion_flutter_charts: ^20.1.57
   url_launcher: ^6.1.0
 
 dev_dependencies:
@@ -77,9 +77,25 @@ flutter:
     - assets/happiness.json
     - assets/health.json
     - assets/success.json
-    - assets/book.png
     - assets/logo.png
     - assets/onboarding_1.png
+    - assets/affirmations.jpg
+    - assets/exercise.jpg
+    - assets/journaling.jpg
+    - assets/meditate.jpg
+    - assets/visulise.jpg
+    - assets/water.jpg
+    - assets/cardio.jpg
+    - assets/fruits.jpg
+    - assets/sleep.jpg
+    - assets/walk.jpg
+    - assets/stretch.jpg
+    - assets/book.jpg
+    - assets/podcast.jpg
+    - assets/dailygoal.jpg
+    - assets/earlywake.jpg
+    - assets/learnnew.jpg
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

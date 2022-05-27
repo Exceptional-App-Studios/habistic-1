@@ -11,7 +11,7 @@
             "type": "track",
             "minigoal": 300,
             "trackway": "Minutes",
-            "image": "https://www.verywellmind.com/thmb/Nt6binzWvLLvn66SHNQlK9Uwz1g=/2119x1414/filters:fill(ABEAC3,1)/GettyImages-938890492-becc3fc4757849bea672f148454943f9.jpg"
+            "image": "assets/meditate.jpg"
         },
         {
             "id": 1,   
@@ -24,7 +24,7 @@
             "type": "track",
             "minigoal": 300,
             "trackway": "Minutes",
-            "image": "https://www.physiotherapymatters.co.uk/wp-content/uploads/2020/08/Returning-to-Exercise-Safely-Post-Lockdown-Physiotherapy-Matters.jpg"
+            "image": "assets/exercise.jpg"
         },
         {
             "id": 2,   
@@ -37,7 +37,7 @@
             "type": "track",
             "minigoal":300,
             "trackway": "Minutes",
-            "image": "https://www.betterup.com/hubfs/Google%20Drive%20Integration/Delivery%20URL%20-%20BetterUp%20-%20how%20to%20start%20journaling%20%5BARTICLE%5D-1.png"
+            "image": "assets/journaling.jpg"
         },
         {
             "id": 3,   
@@ -50,7 +50,7 @@
             "minigoal": 300,
             "type": "track",
             "trackway": "Minutes",
-            "image": "https://i.pinimg.com/originals/c9/a4/78/c9a47869320bc166c101b17438b1873a.jpg"
+            "image": "assets/affirmations.jpg"
         },
         {
             "id": 4,   
@@ -63,7 +63,7 @@
             "minigoal": 300,
             "type": "track",
             "trackway": "Minutes",
-            "image": "https://assets.thehansindia.com/h-upload/feeds/2019/08/26/209963-4.jpg"
+            "image": "assets/visulise.jpg"
         }
     ]
 }

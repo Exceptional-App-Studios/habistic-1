@@ -25,12 +25,12 @@ int duration;
 class _TimerPageState extends State<TimerPage> {
   Box<MyHabitModel> dataBox;
 
-  @override
-  void setState(fn) {
-    if (mounted) {
-      super.setState(fn);
-    }
-  }
+  // @override
+  // void setState(fn) {
+  //   if (mounted) {
+  //     super.setState(fn);
+  //   }
+  // }
 
   @override
   void initState() {
@@ -41,13 +41,16 @@ class _TimerPageState extends State<TimerPage> {
     print(duration);
 
     Timer.periodic(Duration(seconds: 1), (_) {
-      setState(() {
-        stopwatch.start();
-        isPlaying = true;
-      });
       if (stopwatch.elapsed.inSeconds == duration) {
         stopwatch.stop();
         isPaused = true;
+        isPlaying = false;
+      } else {
+        setState(() {
+          stopwatch.start();
+          isPlaying = true;
+          isPaused = false;
+        });
       }
     });
 
@@ -224,7 +227,6 @@ class _TimerPageState extends State<TimerPage> {
                     dataBox.length) {
                   Database.prefs.setInt('totaldays', totaldays + 1);
                 }
-                print("Done after: $done");
 
                 await dataBox.put(
                   widget.index,
@@ -239,6 +241,11 @@ class _TimerPageState extends State<TimerPage> {
                     totaltime: habit.totaltime + stopwatch.elapsed.inSeconds,
                     type: habit.type,
                     donedates: habit.donedates + [date],
+                    everydaytime:
+                        habit.everydaytime + [stopwatch.elapsed.inSeconds],
+                    skipped: false,
+                    streak: habit.streak + 1,
+                    trackway: habit.trackway,
                   ),
                 );
                 Navigator.pop(context);
