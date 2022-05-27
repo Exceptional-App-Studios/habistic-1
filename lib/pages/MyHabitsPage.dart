@@ -604,8 +604,6 @@ class _TrackProgressState extends State<TrackProgress> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
-      // insetPadding: EdgeInsets.all(),
-      // contentPadding: EdgeInsets.zero,
       content: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -727,6 +725,25 @@ class _TrackProgressState extends State<TrackProgress> {
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () {
+                dataBox.put(
+                  widget.index,
+                  MyHabitModel(
+                    name: habit.name,
+                    avgtime: habit.avgtime,
+                    complete: false,
+                    minigoal: habit.minigoal,
+                    reminder: habit.reminder,
+                    todaytime: habit.todaytime,
+                    totaldays: habit.totaldays,
+                    totaltime: habit.totaltime,
+                    type: habit.type,
+                    donedates: habit.donedates + [date],
+                    everydaytime: habit.everydaytime + [0],
+                    trackway: habit.trackway,
+                    streak: 0,
+                    skipped: true,
+                  ),
+                );
                 Navigator.pop(context);
               },
               child: Padding(

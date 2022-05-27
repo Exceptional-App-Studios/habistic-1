@@ -11,7 +11,7 @@
             "type": "yes/no",
             "minigoal": 8,
             "trackway": "Glasses",
-            "image": "https://domf5oio6qrcr.cloudfront.net/medialibrary/7909/conversions/b8a1309a-ba53-48c7-bca3-9c36aab2338a-thumb.jpg"
+            "image": "assets/water.jpg"
         },
         {
             "id": 1,   
@@ -24,7 +24,7 @@
             "minigoal": 2,
             "trackway": "Fruits",
             "type": "yes/no",
-            "image": "https://www.archanaskitchen.com/images/archanaskitchen/world_breakfast/fresh_fruit_bowl_recipe_400.jpg"
+            "image": "assets/fruits.jpg"
         },
         {
             "id": 2,   
@@ -37,7 +37,7 @@
             "minigoal": 600,
             "trackway": "Minutes",
             "type": "track",
-            "image": "https://media-cldnry.s-nbcnews.com/image/upload/t_fit-760w,f_auto,q_auto:best/rockcms/2022-03/power-walk-mc-220309-c355ce.jpg"
+            "image": "assets/walk.jpg"
         },
         {
             "id": 3,   
@@ -50,7 +50,7 @@
             "minigoal": 300,
             "trackway": "Minutes",
             "type": "track",
-            "image": "https://www.besthealthmag.ca/wp-content/uploads/2019/01/what_is_cardio.jpg"
+            "image": "assets/cardio.jpg"
         },
         {
             "id": 4,   
@@ -63,7 +63,7 @@
             "minigoal":300,
             "trackway": "Minutes",
             "type": "track",
-            "image": "https://cdn.shopify.com/s/files/1/0011/1273/5803/articles/stretch_2048x.progressive.jpg?v=1543362227"
+            "image": "assets/stretch.jpg"
         },
         {
             "id": 5,   
@@ -76,7 +76,7 @@
             "minigoal": 25200,
             "trackway": "Hours",
             "type": "track",
-            "image": "https://static.independent.co.uk/2022/03/18/15/newFile-5.jpg?quality=75&width=982&height=726&auto=webp"
+            "image": "assets/sleep.jpg"
         }
     ]
 }

@@ -11,7 +11,7 @@
             "minigoal": 2,
             "trackway": "Pages",
             "type": "yes/no",
-            "image": "https://img-cdn.inc.com/image/upload/w_1920,h_1080,c_fill/images/panoramic/GettyImages-577674005_492115_zfpgiw.jpg"
+            "image": "assets/book.jpg"
         },
         {
             "id": 1,   
@@ -24,7 +24,7 @@
             "minigoal": 600,
             "trackway": "Minutes",
             "type": "track",
-            "image": "https://images.ctfassets.net/yqwtwibiobs4/6ZvqKhJp31iOxGLFgEMd3n/79171fded8585abe36aeadb499ee29d8/Listening_to_podcast_800px_x_451px__1_.jpg"
+            "image": "assets/podcast.jpg"
         },
         {
             "id": 2,   
@@ -36,7 +36,7 @@
             "benefit5": "Increases productivity", 
             "trackway": "",
             "type": "yes/no",
-            "image": "https://www.wikihow.com/images/thumb/2/22/Set-Daily-Goals-Step-4-Version-2.jpg/v4-460px-Set-Daily-Goals-Step-4-Version-2.jpg.webp"
+            "image": "assets/dailygoal.jpg"
         },
         {
             "id": 3,   
@@ -48,7 +48,7 @@
             "benefit5": "Feel Happier",
             "type": "yes/no",
             "trackway": "",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWBu_IoJHHW00ucoQY9JbW_-H10ZniCNRwrg&usqp=CAU"
+            "image": "assets/earlywake.jpg"
         },
         {
             "id": 3,   
@@ -61,7 +61,7 @@
             "minigoal": 300,
             "type": "track",
             "trackway": "Minutes",
-            "image": "https://i.guim.co.uk/img/media/4bfd1f5c9e7f2e525043dc55f20ad573f6b42563/0_356_5381_3231/master/5381..jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=0c250b33583f87935ed08ecbba0a4a4a"
+            "image": "assets/learnnew.jpg"
         }
     ]
 }

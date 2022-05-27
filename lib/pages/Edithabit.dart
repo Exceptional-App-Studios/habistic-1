@@ -153,6 +153,7 @@ class _EditHabitState extends State<EditHabit> {
                                               value.getAt(index).everydaytime,
                                           trackway: value.getAt(index).trackway,
                                           streak: value.getAt(index).streak,
+                                          skipped: value.getAt(index).skipped,
                                         ),
                                       );
                                     },
@@ -276,39 +277,45 @@ class _EditHabitState extends State<EditHabit> {
                                               value.put(
                                                 widget.index,
                                                 MyHabitModel(
-                                                  avgtime: value
-                                                      .getAt(index)
-                                                      .avgtime,
-                                                  complete: value
-                                                      .getAt(index)
-                                                      .complete,
-                                                  minigoal: int.parse(newValue),
-                                                  name: value.getAt(index).name,
-                                                  reminder: value
-                                                      .getAt(index)
-                                                      .reminder,
-                                                  todaytime: value
-                                                      .getAt(index)
-                                                      .todaytime,
-                                                  totaldays: value
-                                                      .getAt(index)
-                                                      .totaldays,
-                                                  totaltime: value
-                                                      .getAt(index)
-                                                      .totaltime,
-                                                  type: value.getAt(index).type,
-                                                  donedates: value
-                                                      .getAt(index)
-                                                      .donedates,
-                                                  everydaytime: value
-                                                      .getAt(index)
-                                                      .donedates,
-                                                  trackway: value
-                                                      .getAt(index)
-                                                      .trackway,
-                                                  streak:
-                                                      value.getAt(index).streak,
-                                                ),
+                                                    avgtime: value
+                                                        .getAt(index)
+                                                        .avgtime,
+                                                    complete: value
+                                                        .getAt(index)
+                                                        .complete,
+                                                    minigoal:
+                                                        int.parse(newValue),
+                                                    name:
+                                                        value.getAt(index).name,
+                                                    reminder: value
+                                                        .getAt(index)
+                                                        .reminder,
+                                                    todaytime: value
+                                                        .getAt(index)
+                                                        .todaytime,
+                                                    totaldays: value
+                                                        .getAt(index)
+                                                        .totaldays,
+                                                    totaltime: value
+                                                        .getAt(index)
+                                                        .totaltime,
+                                                    type:
+                                                        value.getAt(index).type,
+                                                    donedates: value
+                                                        .getAt(index)
+                                                        .donedates,
+                                                    everydaytime: value
+                                                        .getAt(index)
+                                                        .donedates,
+                                                    trackway: value
+                                                        .getAt(index)
+                                                        .trackway,
+                                                    streak: value
+                                                        .getAt(index)
+                                                        .streak,
+                                                    skipped: value
+                                                        .getAt(index)
+                                                        .skipped),
                                               );
                                             },
                                           );

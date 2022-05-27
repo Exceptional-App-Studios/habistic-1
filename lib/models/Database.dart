@@ -194,6 +194,7 @@ class Practice {
         .getValue();
     if (morningdate != date) {
       await Database.prefs.setString("morningdate", date);
+      await Database.prefs.setBool('streakcheck', false);
       await Database.prefs.setInt('done', 0);
       for (var i = 0; i < dataBox.length; i++) {
         await dataBox.putAt(
@@ -224,10 +225,14 @@ class CheckStreak {
   static calBestStreak() {
     Box<MyHabitModel> dataBox = Hive.box<MyHabitModel>(dataBoxName);
     List<String> donedates;
+    // String date = DateFormat("dd-MM-yyyy").format(DateTime.now());
 
     for (var i = 0; i < dataBox.length; i++) {
       donedates = dataBox.getAt(i).donedates;
-      if (donedates.isNotEmpty) {
+      if (donedates.isNotEmpty &&
+          !Database.prefs
+              .getBool('streakcheck', defaultValue: false)
+              .getValue()) {
         DateTime pre = DateTime(
             int.parse(donedates.last.split("-")[2]),
             int.parse(donedates.last.split("-")[1]),
@@ -238,7 +243,11 @@ class CheckStreak {
         DateTime now = dateFormat.parse(string);
         int difference = now.difference(pre).inDays;
 
-        if (difference > 1) {
+        String preFormat = dateFormat.format(pre);
+        print(preFormat);
+
+        if (difference >= 1) {
+          print(i);
           dataBox.putAt(
             i,
             MyHabitModel(
@@ -255,10 +264,12 @@ class CheckStreak {
               trackway: dataBox.getAt(i).trackway,
               everydaytime: dataBox.getAt(i).everydaytime,
               streak: 0,
+              skipped: dataBox.getAt(i).skipped,
             ),
           );
         }
         pre = now;
+        Database.prefs.setBool('streakcheck', true);
       }
     }
   }

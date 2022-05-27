@@ -78,7 +78,7 @@ class _ProgressPageState extends State<ProgressPage> {
                     for (int i = 0; i < data.everydaytime.length; i++) {
                       chartdata.add(
                         _SalesData(
-                          data.donedates.indexOf(data.donedates[i]),
+                          data.donedates.lastIndexOf(data.donedates[i]),
                           data.type == 'yes/no'
                               ? data.everydaytime[i]
                               : data.everydaytime[i] < 60
@@ -128,25 +128,34 @@ class _ProgressPageState extends State<ProgressPage> {
                                   plotAreaBorderColor: Colors.transparent,
                                   isTransposed: true,
                                   primaryYAxis: NumericAxis(
-                                    isVisible: false,
+                                    isVisible: true,
                                     decimalPlaces: 0,
                                     labelIntersectAction:
                                         AxisLabelIntersectAction.none,
-                                    rangePadding: ChartRangePadding.auto,
+                                    majorGridLines:
+                                        const MajorGridLines(width: 0),
+                                    majorTickLines:
+                                        const MajorTickLines(size: 0),
                                     interval: 1,
+                                    axisLine: AxisLine(
+                                      color: Colors.transparent,
+                                    ),
+                                    labelStyle: TextStyle(
+                                      color: Colors.transparent,
+                                    ),
                                   ),
                                   primaryXAxis: NumericAxis(
                                     maximumLabels: 14,
                                     isVisible: true,
                                     decimalPlaces: 0,
-                                    labelAlignment: LabelAlignment.start,
+                                    labelAlignment: LabelAlignment.center,
                                     minimum: -1,
                                     maximum: 14,
                                     interval: 1,
-                                    borderColor: Colors.black,
-                                    labelStyle:
-                                        TextStyle(color: Colors.transparent),
-                                    axisLine: AxisLine(width: 1),
+                                    borderColor: Colors.transparent,
+                                    labelStyle: TextStyle(
+                                      color: Colors.transparent,
+                                    ),
                                     majorGridLines:
                                         const MajorGridLines(width: 0),
                                     majorTickLines:
@@ -165,14 +174,15 @@ class _ProgressPageState extends State<ProgressPage> {
                                       borderRadius: BorderRadius.only(
                                         bottomLeft: Radius.zero,
                                         bottomRight: Radius.zero,
-                                        topLeft: Radius.circular(15),
-                                        topRight: Radius.circular(15),
+                                        topLeft: Radius.circular(12),
+                                        topRight: Radius.circular(12),
                                       ),
                                       sortingOrder: SortingOrder.ascending,
-                                      width: 0.3,
+                                      width: 0.4,
                                       color: HexColor('#5353FF'),
                                       dataLabelSettings: DataLabelSettings(
                                         isVisible: true,
+                                        showZeroValue: true,
                                         textStyle: TextStyle(
                                           fontSize: 10,
                                           color: HexColor('5353FF'),
